@@ -20,16 +20,14 @@
     "network",
     "jsx"
   ],
-  "author": "Vincent Lecrubier <vincent.lecrubier@gmail.com> (http://www.vincentlecrubier.fr/)",
+  "author": "Carter Hesterman <hestermancarter@gmail.com>",
   "license": "MIT",
-  "peerDependencies": {
-    "react": "*"
-  },
   "dependencies": {
     "lodash": "^4.17.15",
     "prop-types": "^15.5.10",
+    "react": "16.x.x",
     "uuid": "^2.0.1",
-    "vis-network": "^5.1.1"
+    "vis-network": "5"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",

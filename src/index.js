@@ -12,12 +12,13 @@ class Graph extends Component {
     const { identifier } = props;
     this.updateGraph = this.updateGraph.bind(this);
     this.state = {
-      identifier: identifier !== undefined ? identifier : uuid.v4()
+      identifier: identifier !== undefined ? identifier : uuid.v4(),
     };
     this.container = React.createRef();
   }
 
   componentDidMount() {
+    console.log("mount");
     this.edges = new vis.DataSet();
     this.edges.add(this.props.graph.edges);
     this.nodes = new vis.DataSet();
@@ -33,8 +34,16 @@ class Graph extends Component {
 
     if (nodesChange) {
       const idIsEqual = (n1, n2) => n1.id === n2.id;
-      const nodesRemoved = differenceWith(this.props.graph.nodes, nextProps.graph.nodes, idIsEqual);
-      const nodesAdded = differenceWith(nextProps.graph.nodes, this.props.graph.nodes, idIsEqual);
+      const nodesRemoved = differenceWith(
+        this.props.graph.nodes,
+        nextProps.graph.nodes,
+        idIsEqual
+      );
+      const nodesAdded = differenceWith(
+        nextProps.graph.nodes,
+        this.props.graph.nodes,
+        idIsEqual
+      );
       const nodesChanged = differenceWith(
         differenceWith(nextProps.graph.nodes, this.props.graph.nodes, isEqual),
         nodesAdded
@@ -43,8 +52,17 @@ class Graph extends Component {
     }
 
     if (edgesChange) {
-      const edgesRemoved = differenceWith(this.props.graph.edges, nextProps.graph.edges, isEqual);
-      const edgesAdded = differenceWith(nextProps.graph.edges, this.props.graph.edges, isEqual);
+      const idIsEqual = (p1, p2) => p1.id === p2.id;
+      const edgesRemoved = differenceWith(
+        this.props.graph.edges,
+        nextProps.graph.edges,
+        idIsEqual
+      );
+      const edgesAdded = differenceWith(
+        nextProps.graph.edges,
+        this.props.graph.edges,
+        idIsEqual
+      );
       const edgesChanged = differenceWith(
         differenceWith(nextProps.graph.edges, this.props.graph.edges, isEqual),
         edgesAdded
@@ -58,26 +76,31 @@ class Graph extends Component {
 
     if (eventsChange) {
       let events = this.props.events || {};
-      for (let eventName of Object.keys(events)) this.Network.off(eventName, events[eventName]);
+      for (let eventName of Object.keys(events))
+        this.Network.off(eventName, events[eventName]);
 
       events = nextProps.events || {};
-      for (let eventName of Object.keys(events)) this.Network.on(eventName, events[eventName]);
+      for (let eventName of Object.keys(events))
+        this.Network.on(eventName, events[eventName]);
     }
 
     return false;
   }
 
   componentDidUpdate() {
+    console.log("update");
     this.updateGraph();
   }
 
   patchEdges({ edgesRemoved, edgesAdded, edgesChanged }) {
+    console.log("patch edges", edgesRemoved, edgesAdded, edgesChanged);
     this.edges.remove(edgesRemoved);
     this.edges.add(edgesAdded);
     this.edges.update(edgesChanged);
   }
 
   patchNodes({ nodesRemoved, nodesAdded, nodesChanged }) {
+    console.log("patch nodes", nodesRemoved, nodesAdded, nodesChanged);
     this.nodes.remove(nodesRemoved);
     this.nodes.add(nodesAdded);
     this.nodes.update(nodesChanged);
@@ -86,7 +109,7 @@ class Graph extends Component {
   updateGraph() {
     let defaultOptions = {
       physics: {
-        stabilization: false
+        stabilization: false,
       },
       autoResize: false,
       edges: {
@@ -96,10 +119,10 @@ class Graph extends Component {
         arrows: {
           to: {
             enabled: true,
-            scaleFactor: 0.5
-          }
-        }
-      }
+            scaleFactor: 0.5,
+          },
+        },
+      },
     };
 
     // merge user provied options with our default ones
@@ -109,7 +132,7 @@ class Graph extends Component {
       this.container.current,
       Object.assign({}, this.props.graph, {
         edges: this.edges,
-        nodes: this.nodes
+        nodes: this.nodes,
       }),
       options
     );
@@ -141,7 +164,7 @@ class Graph extends Component {
       {
         id: identifier,
         ref: this.container,
-        style
+        style,
       },
       identifier
     );
@@ -150,7 +173,7 @@ class Graph extends Component {
 
 Graph.defaultProps = {
   graph: {},
-  style: { width: "100%", height: "100%" }
+  style: { width: "100%", height: "100%" },
 };
 Graph.propTypes = {
   graph: PropTypes.object,
