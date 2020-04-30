@@ -1,6 +1,6 @@
 {
   "name": "react-vis-network-graph",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "A react component to render nice graphs using vis.js",
   "main": "lib/index.js",
   "scripts": {
