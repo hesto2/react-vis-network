@@ -26,7 +26,7 @@
     "prop-types": "^15.5.10",
     "react": "16.x.x",
     "uuid": "^2.0.1",
-    "vis-network": "5"
+    "vis-network": "6.5.2"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
