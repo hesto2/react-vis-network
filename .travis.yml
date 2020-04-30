@@ -1,0 +1,17 @@
+language: node_js
+branches:
+  only:
+    - master
+node_js:
+  - "10"
+before_deploy:
+  - npm run build
+  - cd lib
+deploy:
+  provider: npm
+  api_key: "$NPM_API_TOKEN"
+  email: "$NPM_EMAIL"
+  edge: true
+  skip_cleanup: true
+  on:
+    tags: true
