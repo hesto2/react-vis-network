@@ -18,7 +18,6 @@ class Graph extends Component {
   }
 
   componentDidMount() {
-    console.log("mount")
     this.edges = new vis.DataSet();
     this.edges.add(this.props.graph.edges);
     this.nodes = new vis.DataSet();
@@ -92,14 +91,12 @@ class Graph extends Component {
   }
 
   patchEdges({ edgesRemoved, edgesAdded, edgesChanged }) {
-    console.log("patch edges", edgesRemoved, edgesAdded, edgesChanged);
     this.edges.remove(edgesRemoved);
     this.edges.add(edgesAdded);
     this.edges.update(edgesChanged);
   }
 
   patchNodes({ nodesRemoved, nodesAdded, nodesChanged }) {
-    console.log("patch nodes", nodesRemoved, nodesAdded, nodesChanged);
     this.nodes.remove(nodesRemoved);
     this.nodes.add(nodesAdded);
     this.nodes.update(nodesChanged);
