@@ -18,7 +18,7 @@ class Graph extends Component {
   }
 
   componentDidMount() {
-    console.log("mount");
+    console.log("mount")
     this.edges = new vis.DataSet();
     this.edges.add(this.props.graph.edges);
     this.nodes = new vis.DataSet();
@@ -88,7 +88,6 @@ class Graph extends Component {
   }
 
   componentDidUpdate() {
-    console.log("update");
     this.updateGraph();
   }
 
