@@ -18,6 +18,9 @@ This component takes three vis.js configuration objects as properties:
 - options: normal vis.js options as described [here](http://visjs.org/docs/network/#options)
 - events: an object that has [event name](http://visjs.org/docs/network/#Events) as keys and their callback as values
 
+# Installation
+`yarn add react-vis-network-graph`
+
 # Usage
 
 ```javascript
